@@ -30,6 +30,7 @@ namespace ProAgil.WebAPI
             services.AddDbContext<DataContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors(); //Configuração de permissão para a conexão cruzada (a aplicação angular com a API .NET)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,7 @@ namespace ProAgil.WebAPI
             }
 
             // app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permitindo a conexão remota de toda origem, todo metodo e todo cabeçalho
             app.UseMvc();
         }
     }
