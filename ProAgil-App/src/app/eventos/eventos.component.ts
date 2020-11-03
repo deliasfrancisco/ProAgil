@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  eventos:any;
+  eventos:any = [];
+  filtroLista = '';
 
   constructor(private http: HttpClient) { }
 
