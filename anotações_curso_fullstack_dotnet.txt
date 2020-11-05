@@ -1,0 +1,246 @@
+dotnet -h: exibe os comando que podem ser utilizados no terminal apos a instalação do framework
+dotnet new -h: exibe os comandos para a criação do projeot
+dotnet new console exemplo_criação: cria um projeto do tipo console
+dotnet run: executa a aplicação
+@installed: exibe todas as extensões instaladas
+ctrl + P:  exibe a linha do erro
+ctrl + dot: exibe as bibliotecas ou dependencia para serem instaladas
+alt + click: multiplos cursores
+ctrl + D + D: abre a variavel declarada me todo lugar da pagina para edição
+dotnet restore: restaura as dependencias do projeto
+
+A coleção de projetos criado é uma solução
+
+dotnet new classlib -n Game.lib: cria um projeto do tipo bibliotecas de classe
+dotnet new sln -n GameTop: Cria a solução do projeto
+
+dotnet add GameTop/GameTop.csproj reference .\GameTop.Lib\GameTop.lib.csproj: referencia os projetos criados dentro da solução
+dotnet sln GameTop.sln add .\GameTop\GameTop.csproj .\GameTop.lib\GameTop.lib.csproj
+
+dotnet run --project GameTop\GameTop.csproj: Informa qual é o projeto que eu desejo executar dentro da solução
+dotnet rebuild: limpa todas as DLL's e recria elas novamente
+dotnet watch run: O programa fica em execução e assite as alterações feitas em codigo
+
+## Subindo o projeto para um repositorio do Github
+
+1 - Criar o reopsitorio no github
+2 - No projeto criar o arquivo .gitignore para adicionar os arquivos que não serão feitos commit, adicionar os dois comandos "bin e obj"
+3 - Criar o arquivo README.md
+
+dotnet new web -n ProAgil.Web: Cria um projeto web
+dotnet new mvc -n ProAgil.Mvc: Cria um projeto mvc
+dotnet new webapi -n ProAgil.API: Cria um projeto api
+
+dotnet --version: mostra a versão do SDK que esta sendo utilizado
+dotnet --list-sdks: mostra todas as sdks instaladas no computador
+
+Ctrl + Shif + p no gerenciador de pacotes Nuget e digitar o comando Microsoft.EntityFrameworkCore.Sqlite na versão 2.2.0
+
+
+Obajetos recionais com entity framework
+
+Somente o comando dotnet ef traz uma lista de opções e commandos:
+
+dotnet ef [options] [command]
+
+para fazer a primeira migração se usa o primeiro comando que ira criar o diretorio das migrations:
+dotnet ef migrations add initry key
+
+quando é feito o mapeamento das classes de model, a variavel que se chama id será associada pelo entity como Primary key
+
+Criação e trabalhando com o projeto Angular
+
+No mesmo diretorio criar um projeto Angular
+
+ng new nome_projeto
+
+OBS: Caso haja erro na criação do projeto remova ng.ps1 do diretório C:\Users\%username%\AppData\Roaming\npm\e tente limpar o cache npm emC:\Users\%username%\AppData\Roaming\npm-cache\
+
+ng serve -o: executa o projeto e abre no browser
+
+editor.config: Configura o editor de texto, como espaçamantos, intervalos entre outros
+angular.js: arquivo de configuração de projeto angular
+package.json: possui todas as dependencias instaladas o que serve como facilidado no clone do projeto para que seja instaladas todas as dependencias no node_modules
+
+
+Instalar os frameworks de JavaScript e CSS: npm install --save bootstrap @fortawesome/fontawesome-free
+
+
+	Na classe de controller, onde é definido a rota de execução da aplicação, quando é criado mu projeto do tipo api a rota vem com a descriçãoapi/controller
+isso pode ser alterado para o tipo de aplicaçao que você deseja executar, por exemplo, para site/controller, ai tem que rodar com o dotnet watch run
+
+
+Para rodar as migrations é necessario instalar o pacote de banco de dados, no caso com o comando ctrl + shift + p:
+Pacote: Microsoft.EntityFrameworkCore.Sqlite (Ou o gerenciador de banco de dados que for melhor)
+Versão: 2.2.0
+
+E referenciar em qual projeto você quer adicionar a dependencia, no caso dessa solução será na solução repositorio
+
+Entrar dentro do repositorio e dar o comando dotnet ef para listar os comando disponiveis
+dotnet ef --startup-project ..\ProAgil.WebAPI\ migrations add init -> para definir o projeto que ira ser gravado as migrações
+dotnet ef --startup-project ..\ProAgil.WebAPI\ database update -> Pega as migrations e cria o banco de dados
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProAgil.WebAPI.Data;
-using ProAgil.WebAPI.Model;
 
 namespace ProAgil.WebAPI.Controllers
 {
@@ -14,9 +13,9 @@ namespace ProAgil.WebAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public DataContext _context { get; }
+        public ProAgilContext _context { get; }
         // public readonly DataContext Context; --> é a mesma coisa que a declaração acima
-        public ValuesController(DataContext context)
+        public ValuesController(ProAgilContext context)
         {
             this._context = context;
         }
