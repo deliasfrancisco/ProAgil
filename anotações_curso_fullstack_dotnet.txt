@@ -81,7 +81,17 @@ dotnet ef --startup-project ..\ProAgil.WebAPI\ migrations add init -> para defin
 dotnet ef --startup-project ..\ProAgil.WebAPI\ database update -> Pega as migrations e cria o banco de dados
 
 
+Aula 48
+- Quando se deseja criar uma chave estrangeira tem que se criar dois campos, um com o nome da entidade e outro com o nome da entidade teminando com id para deixar explicito que 
+esta sendo criado um identificador da entidade declarada abaixo
+- protected override void OnModelCreating = // especificando a relação de n para n e definindo quais são os identificadores
 
+Aula 50
+- Metodos da interface void Add<T>(T entity) where T: class --> tipo generico onde o T generico sera uma classe
+
+Aula 52
+- IQueryable<> = Cria uma query que 
+- Toda consulta que ira retornar os dados somente de um registro usar o FirstOrDefaultAsync(), pois ele retornará o primeiro de forma assincrona
 
 
 
