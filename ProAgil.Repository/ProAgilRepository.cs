@@ -16,6 +16,7 @@ namespace ProAgil.Repository
 		public ProAgilRepository(ProAgilContext context)
 		{
 			this._context = context;
+			this._context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 		}
 
 		public void Add<T>(T entity) where T : class
@@ -51,7 +52,8 @@ namespace ProAgil.Repository
 					.ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
 			}
 
-			query = query.OrderByDescending(c => c.DataEvento);
+			query = query.AsNoTracking()
+				.OrderByDescending(c => c.DataEvento);
 			return await query.ToArrayAsync();
 		}
 
@@ -63,7 +65,7 @@ namespace ProAgil.Repository
 
 			if (includePalestrantes)
 			{
-				query = query
+				query = query.AsNoTracking()
 					.Include(p => p.PalestrantesEventos) // se for verdadeiro irá incluir o palestrante porem somente o id
 					.ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
 			}
@@ -80,7 +82,7 @@ namespace ProAgil.Repository
 
 			if (includePalestrantes)
 			{
-				query = query
+				query = query.AsNoTracking()
 					.Include(p => p.PalestrantesEventos) // se for verdadeiro irá incluir o palestrante porem somente o id
 					.ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
 			}
@@ -96,7 +98,7 @@ namespace ProAgil.Repository
 
 			if (includeEventos)
 			{
-				query = query
+				query = query.AsNoTracking()
 					.Include(e => e.PalestrantesEventos)
 					.ThenInclude(e => e.Evento);
 			}
@@ -112,7 +114,7 @@ namespace ProAgil.Repository
 
 			if (includeEventos)
 			{
-				query = query
+				query = query.AsNoTracking()
 					.Include(e => e.PalestrantesEventos)
 					.ThenInclude(e => e.Evento);
 			}
