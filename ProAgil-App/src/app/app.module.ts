@@ -7,20 +7,29 @@ import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
+import { EventoService } from './_services/evento.service';
+import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
       EventosComponent,
-      NavComponent
+      NavComponent,
+      DateTimeFormatPipePipe
    ],
   imports: [
     BrowserModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EventoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

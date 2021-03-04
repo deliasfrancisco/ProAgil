@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.1.6",
+    "@angular/animations": "^10.1.6",
     "@angular/common": "~10.1.6",
     "@angular/compiler": "~10.1.6",
     "@angular/core": "~10.1.6",
@@ -21,6 +21,7 @@
     "@angular/router": "~10.1.6",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bootstrap": "^4.5.3",
+    "ngx-bootstrap": "^6.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

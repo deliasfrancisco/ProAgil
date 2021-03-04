@@ -101,6 +101,26 @@ Aula 56
 - AsNoTracking(): Especifica que não trave o recurso para que ele seja retornado
 - this._context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking - não travar o ambiente de consulta rastreavel
 
+Aula 85
+- Criar e mudar de branch: git checkout -b nomedabranch
+- @Injectable: 
+
+Aula 59
+- @Injectable({ providedIn: 'root' }) - metadado, permite o uso do componente em toda a aplicação, injetar em outros componentes
+- providers: [] - Permite que o componente seja usado por toda a aplicação
+- observable - 
+
+Aula 63
+- criar pipe, botão direto e generate pipe
+- DatePipe: herança informada na classe para trabalhar com o pipe de data - extends
+- add no app.module em declarations a classe DateTimeFormatPipePipe
+
+Aula 64
+- BsDropdownModule.forRoute() - Define que a importação desse modulo pode ser usada na a
+- Instalação do ngx bootstrap, instala~çao e uso dos componentes
+- add os imports do aap.component os imports para a aplicação inteira com o BsDropdownModule.forRoute()
+
+
 
 
 
