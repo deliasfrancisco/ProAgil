@@ -44,7 +44,7 @@ A coleção de projetos criado é uma solução
 
 
 
-Obajetos recionais com entity framework
+Objetos recionais com entity framework
 
 
 quando é feito o mapeamento das classes de model, a variavel que se chama id será associada pelo entity como Primary key
@@ -119,6 +119,10 @@ Aula 64
 - BsDropdownModule.forRoute() - Define que a importação desse modulo pode ser usada na a
 - Instalação do ngx bootstrap, instala~çao e uso dos componentes
 - add os imports do aap.component os imports para a aplicação inteira com o BsDropdownModule.forRoute()
+
+Aula 71
+- NgClass - diz qual css sera usado de acordo com a condição especifica
+- nome_FormGroup.get(nome_formGroupName)
 
 
 

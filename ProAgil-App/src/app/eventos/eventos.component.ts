@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../_models/Evento';
 import { ThrowStmt } from '@angular/compiler';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-eventos',
@@ -11,23 +12,41 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class EventosComponent implements OnInit {
 
-  eventos: Evento[];
   eventosFiltrados: Evento[];
+  eventos: Evento[];
   imagemLargura  = 50;
   imagemMargem = 2;
   mostrarImagem = false;
   _filtroLista:string = '';
   modalRef: BsModalRef;
-
+  registerForm: FormGroup;
 
   constructor(
     private eventoService: EventoService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private formBuilder: FormBuilder
     )
     { }
 
   ngOnInit() {
+    this.validations();
     this.getEventos();
+  }
+
+  salvarAlteracao(){
+
+  }
+
+  public validations(){
+    this.registerForm = this.formBuilder.group({
+      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      local: ['', Validators.required],
+      dataEvento: ['', Validators.required],
+      qtdPessoas: ['', [Validators.required, Validators.max(1200)]],
+      telefone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      imagemUrl: ['', Validators.required]
+    });
   }
 
   get filtroLista(): string{
@@ -41,8 +60,8 @@ export class EventosComponent implements OnInit {
 
   filtrarEventos(filtrarPor:string): Evento[]{
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventos.filter(evento =>
-        evento.tema.toLocaleLowerCase().indexOf(filtrarPor)
+    return this.eventos.filter(
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor)
       );
   }
 
