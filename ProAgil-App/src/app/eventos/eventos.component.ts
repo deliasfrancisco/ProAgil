@@ -3,7 +3,11 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Evento } from '../_models/Evento';
 import { ThrowStmt } from '@angular/compiler';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {BsLocaleService } from 'ngx-bootstrap/datepicker';
+import {ptBrLocale } from 'ngx-bootstrap/locale';
+import {defineLocale} from 'ngx-bootstrap/chronos';
+defineLocale('pt-br', ptBrLocale);
 
 @Component({
   selector: 'app-eventos',
@@ -24,9 +28,12 @@ export class EventosComponent implements OnInit {
   constructor(
     private eventoService: EventoService,
     private modalService: BsModalService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private localeService: BsLocaleService
     )
-    { }
+    {
+      this.localeService.use('pt-br');
+     }
 
   ngOnInit() {
     this.validations();

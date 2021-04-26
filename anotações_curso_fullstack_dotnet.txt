@@ -124,6 +124,20 @@ Aula 71
 - NgClass - diz qual css sera usado de acordo com a condição especifica
 - nome_FormGroup.get(nome_formGroupName)
 
+Aula 73
+- Injeção de dependencia: Instanciar a uma classe no construtor de outra classe
+
+Aula 74
+- Inserindo no projeto o BsDatepickerModule.forRoot() **forRoot() para a aplicação inteira
+- Adicionar no arquivo Style.css o import - @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+- ** Todos os imports deve ficam no arquivo app.module raiz **
+- Adicionar parametro do construtor = private localeService: BsLocaleService
+- Dentro do contrutor definir = this.localeService.use('pt-br');
+- Adicionar horario no datepickker - [bsConfig]="{dateInputFormat : 'DD/MM/YYYY hh:mm a' }"
+
+
+
+
 
 
 
