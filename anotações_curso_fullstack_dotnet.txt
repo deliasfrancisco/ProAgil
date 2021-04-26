@@ -31,6 +31,7 @@ ctrl + D + D: abre a variavel declarada me todo lugar da pagina para edição
 ctrl + k + d - Atalho para identar o codigo
 ctrl + M + O = colapsa codigo e metodos
 Ctrl + Shif + p no gerenciador de pacotes Nuget e digitar o comando Microsoft.EntityFrameworkCore.Sqlite na versão 2.2.0
+Ctrl + Shif + p - Reindent Select Lines: idanta o codigo no vs code
 
 
 A coleção de projetos criado é uma solução
@@ -135,6 +136,19 @@ Aula 74
 - Dentro do contrutor definir = this.localeService.use('pt-br');
 - Adicionar horario no datepickker - [bsConfig]="{dateInputFormat : 'DD/MM/YYYY hh:mm a' }"
 
+Aula 75 
+- ml-auto: Joga o conteudo das tags para a esquerda
+- mr-auto: Joga o conteudo das tags para a direita
+- d-flex: distancia os elementos dentro da div
+
+Aula 76
+- this.evento = Object.assign({}, this.registerForm.value); - Atribui os valores do formulario em uma variavel
+- o observable precisa do subscribe para trabalhar de forma sincrona
+- O subscribe retorna dois eventos, em caso de a consulta retorne com sucesso com a aerofunction trabalha com o retorno
+	e o segundo parametro é para tratar caso de erro
+	
+Aula 79
+- this.registerForm.reset(): Limpa todas as informações que estão no formulario
 
 
 
