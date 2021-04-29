@@ -150,6 +150,19 @@ Aula 76
 Aula 79
 - this.registerForm.reset(): Limpa todas as informações que estão no formulario
 
+Aula 83
+- Automappers: ctrl + shif + p - AutoMapper.Extensions.Microsoft.DependencyInjection
+- Faz uma vericação na dll gerada 
+- Criar no projeto de api o arquivo no diretorio: helpers -> AutoMapperProfile.cs
+- Criar um construtor e dentro usar referenciar o mapeamento com o metodo CreateMap<nomeClasse, nomeClasseDto>()
+- Apos isso ir na classe de Startup e na classe de ConfigureServices(IServiceCollection collection) usar a propriedade do objeto services.AddAutoMapper()
+- AutoMapper.Extensions.Microsoft.DependencyInjection
+
+** C# **
+Aula 85
+- ThenInclude: Relação de muitos para muitos
+- na relação ir no createMapper e atrubir essa relação também ForMember(): 
+
 
 
 
