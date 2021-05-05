@@ -31,6 +31,7 @@ ctrl + D + D: abre a variavel declarada me todo lugar da pagina para edição
 ctrl + k + d - Atalho para identar o codigo
 ctrl + M + O = colapsa codigo e metodos
 Ctrl + Shif + p no gerenciador de pacotes Nuget e digitar o comando Microsoft.EntityFrameworkCore.Sqlite na versão 2.2.0
+Ctrl + Shif + p - Reindent Select Lines: idanta o codigo no vs code
 
 
 A coleção de projetos criado é uma solução
@@ -44,7 +45,7 @@ A coleção de projetos criado é uma solução
 
 
 
-Obajetos recionais com entity framework
+Objetos recionais com entity framework
 
 
 quando é feito o mapeamento das classes de model, a variavel que se chama id será associada pelo entity como Primary key
@@ -119,6 +120,50 @@ Aula 64
 - BsDropdownModule.forRoute() - Define que a importação desse modulo pode ser usada na a
 - Instalação do ngx bootstrap, instala~çao e uso dos componentes
 - add os imports do aap.component os imports para a aplicação inteira com o BsDropdownModule.forRoute()
+
+Aula 71
+- NgClass - diz qual css sera usado de acordo com a condição especifica
+- nome_FormGroup.get(nome_formGroupName)
+
+Aula 73
+- Injeção de dependencia: Instanciar a uma classe no construtor de outra classe
+
+Aula 74
+- Inserindo no projeto o BsDatepickerModule.forRoot() **forRoot() para a aplicação inteira
+- Adicionar no arquivo Style.css o import - @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+- ** Todos os imports deve ficam no arquivo app.module raiz **
+- Adicionar parametro do construtor = private localeService: BsLocaleService
+- Dentro do contrutor definir = this.localeService.use('pt-br');
+- Adicionar horario no datepickker - [bsConfig]="{dateInputFormat : 'DD/MM/YYYY hh:mm a' }"
+
+Aula 75 
+- ml-auto: Joga o conteudo das tags para a esquerda
+- mr-auto: Joga o conteudo das tags para a direita
+- d-flex: distancia os elementos dentro da div
+
+Aula 76
+- this.evento = Object.assign({}, this.registerForm.value); - Atribui os valores do formulario em uma variavel
+- o observable precisa do subscribe para trabalhar de forma sincrona
+- O subscribe retorna dois eventos, em caso de a consulta retorne com sucesso com a aerofunction trabalha com o retorno
+	e o segundo parametro é para tratar caso de erro
+	
+Aula 79
+- this.registerForm.reset(): Limpa todas as informações que estão no formulario
+
+Aula 83
+- Automappers: ctrl + shif + p - AutoMapper.Extensions.Microsoft.DependencyInjection
+- Faz uma vericação na dll gerada 
+- Criar no projeto de api o arquivo no diretorio: helpers -> AutoMapperProfile.cs
+- Criar um construtor e dentro usar referenciar o mapeamento com o metodo CreateMap<nomeClasse, nomeClasseDto>()
+- Apos isso ir na classe de Startup e na classe de ConfigureServices(IServiceCollection collection) usar a propriedade do objeto services.AddAutoMapper()
+- AutoMapper.Extensions.Microsoft.DependencyInjection
+
+** C# **
+Aula 85
+- ThenInclude: Relação de muitos para muitos
+- na relação ir no createMapper e atrubir essa relação também ForMember(): 
+
+
 
 
 
