@@ -62,7 +62,7 @@ namespace ProAgil.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
+        public async Task<IActionResult> Post([FromBody]Evento model)
         {
             try
             {
@@ -81,14 +81,22 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(int eventoId, Evento model)
+        [HttpPut("editar")]
+        public async Task<IActionResult> Put([FromBody]Evento model)
         {
             try
             {
-                var evento = await _repository.GetAllEventosAsyncById(eventoId, false);
+                var evento = new Evento();
+                evento = await _repository.GetAllEventosAsyncById(model.EventoId, false);
+                evento.Tema = model.Tema;
+                evento.Local = model.Local;
+                evento.DataEvento = model.DataEvento;
+                evento.QtdPessoas = model.QtdPessoas;
+                evento.ImagemUrl = model.ImagemUrl;
+                evento.Telefone = model.Telefone;
+                evento.Email = model.Email;
 
-                if(evento == null)
+                if (evento == null)
                     return NotFound();
 
                 _repository.Update(model);
@@ -106,7 +114,7 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
+        [HttpDelete("deletarById/{eventoId}")]
         public async Task<IActionResult> Delete(int eventoId)
         {
             try
@@ -116,7 +124,7 @@ namespace ProAgil.WebAPI.Controllers
                 if (evento == null)
                     return NotFound();
 
-                _repository.Update(evento);
+                _repository.Delete(evento);
 
                 if (await _repository.SaveChangesAsync())
                 {
