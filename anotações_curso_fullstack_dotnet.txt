@@ -109,7 +109,7 @@ Aula 85
 Aula 59
 - @Injectable({ providedIn: 'root' }) - metadado, permite o uso do componente em toda a aplicação, injetar em outros componentes
 - providers: [] - Permite que o componente seja usado por toda a aplicação
-- observable - 
+- observable - É 
 
 Aula 63
 - criar pipe, botão direto e generate pipe
