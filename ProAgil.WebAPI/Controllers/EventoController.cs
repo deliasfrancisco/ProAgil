@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProAgil.Domain;
 using ProAgil.Repository;
+using ProAgil.WebAPI.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +12,31 @@ using System.Threading.Tasks;
 namespace ProAgil.WebAPI.Controllers
 {
 	[Route("api/[controller]")]
+    [ApiController]
 	public class EventoController : ControllerBase
 	{
 		private readonly IProAgilRepository _repository;
+        private readonly IMapper _mapper;
 
-		public EventoController(IProAgilRepository repository)
+		public EventoController(IProAgilRepository repository, IMapper mapper)
 		{
 			this._repository = repository;
-		}
+            this._mapper = mapper;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var results = await _repository.GetAllEventosAsyncBy(true);
+                var eventos = await _repository.GetAllEventosAsyncBy(true); // Lista de array
+                var results = _mapper.Map<EventoDto[]>(eventos); // Add o IEnumerable quando o mapeamento receber como parametro uma lista
+
                 return Ok(results);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Consulta falhou falhou {ex.Message}");
             }
         }
 
@@ -38,7 +45,8 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                var results = await _repository.GetAllEventosAsyncById(eventoId, true);
+                var evento = await _repository.GetAllEventosAsyncById(eventoId, true);
+                var results = _mapper.Map<EventoDto>(evento);
                 return Ok(results);
             }
             catch (System.Exception)
@@ -62,15 +70,16 @@ namespace ProAgil.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Evento model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
+                var results = _mapper.Map<Evento>(model);
                 _repository.Add(model);
 
 				if (await _repository.SaveChangesAsync())
 				{
-                    return Created($"/api/evento/{model.EventoId}", model);
+                    return Created($"/api/evento/{results.EventoId}", _mapper.Map<EventoDto>(model));
 				}
             }
             catch (System.Exception)
@@ -82,28 +91,21 @@ namespace ProAgil.WebAPI.Controllers
         }
 
         [HttpPut("editar")]
-        public async Task<IActionResult> Put([FromBody]Evento model)
+        public async Task<IActionResult> Put(EventoDto model)
         {
             try
             {
-                var evento = new Evento();
-                evento = await _repository.GetAllEventosAsyncById(model.EventoId, false);
-                evento.Tema = model.Tema;
-                evento.Local = model.Local;
-                evento.DataEvento = model.DataEvento;
-                evento.QtdPessoas = model.QtdPessoas;
-                evento.ImagemUrl = model.ImagemUrl;
-                evento.Telefone = model.Telefone;
-                evento.Email = model.Email;
+                var evento = await _repository.GetAllEventosAsyncById(model.EventoId, false);
+                _mapper.Map(model, evento);
 
                 if (evento == null)
                     return NotFound();
 
-                _repository.Update(model);
+                _repository.Update(evento);
 
                 if (await _repository.SaveChangesAsync())
                 {
-                    return Created($"/api/evento/{model.EventoId}", model);
+                    return Created($"/api/evento/{model.EventoId}", _mapper.Map<EventoDto>(model));
                 }
             }
             catch (System.Exception)

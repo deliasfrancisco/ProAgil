@@ -7,7 +7,8 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class EventoDto
     {
-        public string Local { get; set; }
+		public int EventoId { get; set; }
+		public string Local { get; set; }
         public string DataEvento { get; set; }
         public string Tema { get; set; }
         public int QtdPessoas { get; set; }
