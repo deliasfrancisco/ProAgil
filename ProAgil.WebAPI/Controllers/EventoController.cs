@@ -133,9 +133,9 @@ namespace ProAgil.WebAPI.Controllers
                     return Ok();
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex + " Consulta falhou falhou");
             }
 
             return BadRequest();
