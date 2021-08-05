@@ -4,10 +4,11 @@ import { Evento } from '../_models/Evento';
 import { ThrowStmt } from '@angular/compiler';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {BsLocaleService } from 'ngx-bootstrap/datepicker';
-import {ptBrLocale } from 'ngx-bootstrap/locale';
-import {defineLocale} from 'ngx-bootstrap/chronos';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+import { defineLocale} from 'ngx-bootstrap/chronos';
 defineLocale('pt-br', ptBrLocale);
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-eventos',
@@ -31,7 +32,8 @@ export class EventosComponent implements OnInit {
     private eventoService: EventoService,
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private toastr: ToastrService
     )
     {
       this.localeService.use('pt-br');
@@ -60,7 +62,13 @@ export class EventosComponent implements OnInit {
       .subscribe(() => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Sucesso!', 'Evento criado com sucesso', {
+            timeOut: 3000,
+          });
         }, error => {
+          this.toastr.success('Erro', 'Erro ao criar evento', {
+            timeOut: 3000,
+          });
           console.log(error);
         }
         );
@@ -106,7 +114,8 @@ export class EventosComponent implements OnInit {
       DataEvento: evento.dataEvento,
       Telefone: evento.telefone,
       Email: evento.email,
-      ImagemUrl: evento.imagemUrl
+      ImagemUrl: evento.imagemUrl,
+      QtdPessoas: evento.qtdPessoas
     });
     console.log(this.registerForm.controls);
   }
@@ -147,7 +156,14 @@ export class EventosComponent implements OnInit {
     this.eventoService.deleteEventoById(this.evento['eventoId']).subscribe(() => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Sucesso!', 'Deletado com sucesso', {
+            timeOut: 3000,
+          });
+
         }, error => {
+          this.toastr.error('Erro', 'Erro ao tentar deletar', {
+            timeOut: 3000,
+          });
           console.log(error);
         }
     );
