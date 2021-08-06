@@ -75,16 +75,16 @@ namespace ProAgil.WebAPI.Controllers
             try
             {
                 var results = _mapper.Map<Evento>(model);
-                _repository.Add(model);
+                _repository.Add(results);
 
 				if (await _repository.SaveChangesAsync())
 				{
                     return Created($"/api/evento/{results.EventoId}", _mapper.Map<EventoDto>(model));
 				}
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Consulta falhou falhou: {ex.Message}");
             }
 
             return BadRequest();
