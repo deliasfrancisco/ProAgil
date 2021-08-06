@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EventosComponent implements OnInit {
 
+  titulo = 'Eventos';
   eventosFiltrados: Evento[];
   eventos: Evento[];
   evento: Evento;
@@ -54,7 +55,10 @@ export class EventosComponent implements OnInit {
 
   salvarAlteracao(template: any){
   if(this.registerForm.valid){
-    let eventoId = this.evento['eventoId'];
+    let eventoId;
+    if (this.evento) {
+      eventoId = this.evento['eventoId'];
+    }
     if(this.modoSalvar === 'post'){
       this.evento = Object.assign({}, this.registerForm.value);
       console.log(this.evento);
@@ -62,11 +66,11 @@ export class EventosComponent implements OnInit {
       .subscribe(() => {
           template.hide();
           this.getEventos();
-          this.toastr.success('Sucesso!', 'Evento criado com sucesso', {
+          this.toastr.success('Evento criado com sucesso', 'Sucesso!', {
             timeOut: 3000,
           });
         }, error => {
-          this.toastr.success('Erro', 'Erro ao criar evento', {
+          this.toastr.error('Erro ao criar evento', 'Erro', {
             timeOut: 3000,
           });
           console.log(error);
