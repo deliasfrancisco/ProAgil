@@ -6,7 +6,9 @@ using ProAgil.Repository;
 using ProAgil.WebAPI.Dtos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace ProAgil.WebAPI.Controllers
@@ -38,6 +40,35 @@ namespace ProAgil.WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Consulta falhou falhou {ex.Message}");
             }
+        }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources", "Images"); // Diretorio que será armazenado as imagens
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName); // Combina o diretorio onde quer armazenar mais o diretorio atual da aplicação
+
+				if (file.Length > 0)
+				{
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName;
+                    var fullPath = Path.Combine(pathToSave, fileName.Replace("\"", " ").Trim());
+
+                    using (var stram  = new FileStream(fullPath, FileMode.Create))
+					{
+                        file.CopyTo(stram);
+					}
+				}
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro no upload da aplicação {ex.Message}");
+            }
+            return BadRequest("Erro ao executar do upload da aplicação");
         }
 
         [HttpGet("getByEventoId{eventoId}")]

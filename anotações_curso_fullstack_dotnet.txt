@@ -176,6 +176,15 @@ Aula 89
 Aula 90
 - Quando se usa o [ApiController] não se tem necessidade de passar que a requisição e via [FromBody], se não tiver ele não vai fazer a validação de dataAnnotations
 
+Aula 95
+- No app-routing.module na constante de routes é configurado o path (caminho) e o componente que será chamado (component)
+- routerLink="": add na tag de botão de deseja inserir o path do componente definido no app-routing
+
+Aula 96
+- Toda vez que nenhuma rota for passada no navegador o redirectTo encaminha para o componente que estiver nele
+
+Aula 97
+- @Input(): Permite que uma variavel recebe valores de outros componentes
 
 
 
