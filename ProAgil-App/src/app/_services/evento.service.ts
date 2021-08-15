@@ -21,16 +21,27 @@ export class EventoService {
     return this.http.get<Evento>(`${this.baseURL}/${id}`);
   }
 
-  postEvento(evento: Evento) {
+  postUpload(file: File, name: string)
+  {
+    const fileToUpload = <File>file[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, name);
+
+    return this.http.post(`${this.baseURL}/upload`, formData)
+  }
+
+  postEvento(evento: any) {
     return this.http.post(this.baseURL, evento);
   }
 
   putEvento(evento: Evento) {
-    return this.http.put(`${this.baseURL}/${evento.eventoId}`, evento);
+    var url = `${this.baseURL}/editar`;
+    return this.http.put(url, evento);
   }
 
   deleteEventoById(id: number) {
-    return this.http.delete(`${this.baseURL}/${id}`);
+    var url = `${this.baseURL}/deletarById/${id}`;
+    return this.http.delete(url);
   }
 
-}
+}//

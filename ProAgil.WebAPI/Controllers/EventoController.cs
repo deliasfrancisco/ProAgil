@@ -1,36 +1,74 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProAgil.Domain;
 using ProAgil.Repository;
+using ProAgil.WebAPI.Dtos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace ProAgil.WebAPI.Controllers
 {
 	[Route("api/[controller]")]
+    [ApiController]
 	public class EventoController : ControllerBase
 	{
 		private readonly IProAgilRepository _repository;
+        private readonly IMapper _mapper;
 
-		public EventoController(IProAgilRepository repository)
+		public EventoController(IProAgilRepository repository, IMapper mapper)
 		{
 			this._repository = repository;
-		}
+            this._mapper = mapper;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var results = await _repository.GetAllEventosAsyncBy(true);
+                var eventos = await _repository.GetAllEventosAsyncBy(true); // Lista de array
+                var results = _mapper.Map<EventoDto[]>(eventos); // Add o IEnumerable quando o mapeamento receber como parametro uma lista
+
                 return Ok(results);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Consulta falhou falhou {ex.Message}");
             }
+        }
+
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources", "Images"); // Diretorio que será armazenado as imagens
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName); // Combina o diretorio onde quer armazenar mais o diretorio atual da aplicação
+
+				if (file.Length > 0)
+				{
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName;
+                    var fullPath = Path.Combine(pathToSave, fileName.Replace("\"", " ").Trim());
+
+                    using (var stram  = new FileStream(fullPath, FileMode.Create))
+					{
+                        file.CopyTo(stram);
+					}
+				}
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro no upload da aplicação {ex.Message}");
+            }
+            return BadRequest("Erro ao executar do upload da aplicação");
         }
 
         [HttpGet("getByEventoId{eventoId}")]
@@ -38,7 +76,8 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                var results = await _repository.GetAllEventosAsyncById(eventoId, true);
+                var evento = await _repository.GetAllEventosAsyncById(eventoId, true);
+                var results = _mapper.Map<EventoDto>(evento);
                 return Ok(results);
             }
             catch (System.Exception)
@@ -62,40 +101,42 @@ namespace ProAgil.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
-                _repository.Add(model);
+                var results = _mapper.Map<Evento>(model);
+                _repository.Add(results);
 
 				if (await _repository.SaveChangesAsync())
 				{
-                    return Created($"/api/evento/{model.EventoId}", model);
+                    return Created($"/api/evento/{results.EventoId}", _mapper.Map<EventoDto>(model));
 				}
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Consulta falhou falhou: {ex.Message}");
             }
 
             return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put(int eventoId, Evento model)
+        [HttpPut("editar")]
+        public async Task<IActionResult> Put(EventoDto model)
         {
             try
             {
-                var evento = await _repository.GetAllEventosAsyncById(eventoId, false);
+                var evento = await _repository.GetAllEventosAsyncById(model.EventoId, false);
+                _mapper.Map(model, evento);
 
-                if(evento == null)
+                if (evento == null)
                     return NotFound();
 
-                _repository.Update(model);
+                _repository.Update(evento);
 
                 if (await _repository.SaveChangesAsync())
                 {
-                    return Created($"/api/evento/{model.EventoId}", model);
+                    return Created($"/api/evento/{model.EventoId}", _mapper.Map<EventoDto>(model));
                 }
             }
             catch (System.Exception)
@@ -106,7 +147,7 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
+        [HttpDelete("deletarById/{eventoId}")]
         public async Task<IActionResult> Delete(int eventoId)
         {
             try
@@ -116,16 +157,16 @@ namespace ProAgil.WebAPI.Controllers
                 if (evento == null)
                     return NotFound();
 
-                _repository.Update(evento);
+                _repository.Delete(evento);
 
                 if (await _repository.SaveChangesAsync())
                 {
                     return Ok();
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex + " Consulta falhou falhou");
             }
 
             return BadRequest();

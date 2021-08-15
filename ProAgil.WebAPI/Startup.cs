@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ProAgil.Repository;
 using ProAgil.WebAPI.Data;
 using AutoMapper;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ProAgil.WebAPI
 {
@@ -46,6 +49,13 @@ namespace ProAgil.WebAPI
             // app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); //Permitindo a conexão remota de toda origem, todo metodo e todo cabeçalho
             app.UseMvc();
+
+            // Configurações para fazer o upload de arquivos
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions() { 
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
         }
     }
 }

@@ -109,7 +109,7 @@ Aula 85
 Aula 59
 - @Injectable({ providedIn: 'root' }) - metadado, permite o uso do componente em toda a aplicação, injetar em outros componentes
 - providers: [] - Permite que o componente seja usado por toda a aplicação
-- observable - 
+- observable - É 
 
 Aula 63
 - criar pipe, botão direto e generate pipe
@@ -162,6 +162,29 @@ Aula 83
 Aula 85
 - ThenInclude: Relação de muitos para muitos
 - na relação ir no createMapper e atrubir essa relação também ForMember(): 
+
+Aula 86
+- Add o Mapper na classe de startup no metodo de configure services > services.AddAutoMapper() para que possa ser injetado nas controllers
+- Add o IEnumerable quando o mapeamento receber como parametro uma lista 
+
+Aula 87
+- No automapper é possivel realizar tanto o mapeamento da dto para o modelo quando do model para a dto com o .ReverseMap() add no create mapper
+
+Aula 89
+- DataAnnotations: São 
+
+Aula 90
+- Quando se usa o [ApiController] não se tem necessidade de passar que a requisição e via [FromBody], se não tiver ele não vai fazer a validação de dataAnnotations
+
+Aula 95
+- No app-routing.module na constante de routes é configurado o path (caminho) e o componente que será chamado (component)
+- routerLink="": add na tag de botão de deseja inserir o path do componente definido no app-routing
+
+Aula 96
+- Toda vez que nenhuma rota for passada no navegador o redirectTo encaminha para o componente que estiver nele
+
+Aula 97
+- @Input(): Permite que uma variavel recebe valores de outros componentes
 
 
 
