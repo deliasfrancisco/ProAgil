@@ -187,8 +187,35 @@ Aula 97
 - @Input(): Permite que uma variavel recebe valores de outros componentes
 
 
+Aula 107
+- Object.assign({}, model) = Copia as informações de um objeto para outro, sem fazer o bind
 
 
+## DOTNET CORE IDENTITY (TOKEN - JWT) ##
+
+Aula 112
+- Add o entityframework no contexto: IdentityDbContext
+- Instalae biblioteca do identity: Microsoft.AspNetCore.Identity.EntityFrameworkCore
+- Criar um diretorio no projeto de dominio (que estão as entidades de banco) chamado 'Entity' para add as classe que irão herdar as classe do idemtity (user, role e userrole),
+	cada uma implementando respectivamente (IdentityUser, IdentityRole e IdentityUserRole)
+- Quando não é passado um parametro na implementação das entidades criadas acima, os ids serão gerados em forma de hash
+
+Aula 113
+- Vincular as entidades ao Identiy para que seja criadas as tabelas da estrutura do Identity: IdentityDbContext<User,Role,int,
+                                                   IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
+                                                   IdentityRoleClaim<int>, IdentityUserToken<int>>
+- Tambem informar que a entidade base no OnModelCreating(): base.OnModelCreating(modelBuilder)
+
+Aula 114
+- Iniciar as migrations, entrar no diretorio repository e: dotnet ef --startup-project ..\ProAgil.WebAPI\ migrations add init
+- Criar base de dados com o comando:
+
+Aula 115
+- services.AddMvc(): Determina qual controller será chamada
+
+Aula 116
+- JWT: Json Web Token
+- 
 
 
 
