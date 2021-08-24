@@ -23,7 +23,7 @@ import { TituloComponent } from './_shared/titulo/titulo.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
-import { AuthInterceptor } from './auth/auth.inteceptor';
+import { AuthInterceptor } from './components/auth/auth.inteceptor';
 
 
 @NgModule({
