@@ -214,9 +214,32 @@ Aula 115
 - services.AddMvc(): Determina qual controller será chamada
 
 Aula 116
-- JWT: Json Web Token
-- 
+- JWT: Json Web Token: no C#
 
+Aula 131
+- Instalar o jwt no Angular: @auth0angular-jwt
+- Importar o auth JWT no auth.service: import { JwtHelperService } from '@auth0/angular-jwt';
+- .pipe(): Como o retorno vai ser um observable, com o pipe é possivel usar o map() - mapeamento
+- localStorage: Armazenamento local do browser, todos tem, fica na aba de apliccation, no menu esquerdo
+
+Aula 134
+- A chave de criptografia de token fica armazenada no localStorage
+
+Aula 135
+- const tokenHeader = new HttpHeaders({'Authorization':`Bearer ${localStorage.getItem('token')}`}) - Acessa o localStorage para pegar a chave token do JWT
+- ng g g auth\auth: Para gerar o guardião de rotas
+
+Aula 136
+- CanActivate: receve dois parametros, um é o snapshot da rota e o outro é um snapshot da rota
+- No app-routing.module add em cada objeto da rota o paramentro do canActivate passando o AuthGuard criado - EX: {path: 'eventos', component: EventosComponent, canActivate: [AuthGuard]},
+
+Aula 137
+- Intercptor: intercepta as chamadas http para inserir os token da requisição
+- Na classe app.module add no providers o interceptor:   
+	* providers: [EventoService, { 
+		provide: HTTP_INTERCEPTORS, // Informa o provide
+		useClass: AuthInterceptor, // Informa qual clase sera usada com o configuração do interceptor
+		multi: true}], // Permite o empilhamento de requisições configuradas no interceptor com o tap()
 
 
 
