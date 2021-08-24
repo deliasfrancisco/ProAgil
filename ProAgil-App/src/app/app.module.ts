@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
+import { EventosComponent } from '../app/components/eventos/eventos.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './_services/evento.service';
@@ -16,10 +16,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { ToastrModule } from 'ngx-toastr';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PalestrantesComponent } from './palestrantes/palestrantes.component';
-import { ContatosComponent } from './contatos/contatos.component';
+import { DashboardComponent } from '../app/components/dashboard/dashboard.component';
+import { PalestrantesComponent } from '../app/components/palestrantes/palestrantes.component';
+import { ContatosComponent } from '../app/components/contatos/contatos.component';
 import { TituloComponent } from './_shared/titulo/titulo.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
+import { AuthInterceptor } from './auth/auth.inteceptor';
 
 
 @NgModule({
@@ -31,7 +35,10 @@ import { TituloComponent } from './_shared/titulo/titulo.component';
       DashboardComponent,
       PalestrantesComponent,
       ContatosComponent,
-      TituloComponent
+      TituloComponent,
+      UserComponent,
+      LoginComponent,
+      RegistrationComponent
    ],
   imports: [
     BrowserModule,
@@ -51,7 +58,7 @@ import { TituloComponent } from './_shared/titulo/titulo.component';
       preventDuplicates: true,
     })
   ],
-  providers: [EventoService],
+  providers: [EventoService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
