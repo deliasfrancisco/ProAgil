@@ -240,6 +240,8 @@ Aula 137
 		provide: HTTP_INTERCEPTORS, // Informa o provide
 		useClass: AuthInterceptor, // Informa qual clase sera usada com o configuração do interceptor
 		multi: true}], // Permite o empilhamento de requisições configuradas no interceptor com o tap()
+		
+Aula 
 
 
 
