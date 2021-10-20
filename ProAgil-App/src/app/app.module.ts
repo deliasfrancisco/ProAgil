@@ -24,7 +24,9 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { AuthInterceptor } from './components/auth/auth.inteceptor';
-
+import { EventoEditComponent } from './components/eventos/evento-edit/evento-edit.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { AuthInterceptor } from './components/auth/auth.inteceptor';
       TituloComponent,
       UserComponent,
       LoginComponent,
-      RegistrationComponent
+      RegistrationComponent,
+      EventoEditComponent
    ],
   imports: [
     BrowserModule,
@@ -56,7 +59,9 @@ import { AuthInterceptor } from './components/auth/auth.inteceptor';
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })
+    }),
+    NgxMaskModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [EventoService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

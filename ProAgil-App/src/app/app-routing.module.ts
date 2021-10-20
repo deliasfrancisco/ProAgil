@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './components/auth/auth.guard';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EventoEditComponent } from './components/eventos/evento-edit/evento-edit.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   },
 
   {path: 'eventos', component: EventosComponent, canActivate: [AuthGuard]},
+  {path: 'evento/:id/edit', component: EventoEditComponent, canActivate: [AuthGuard]},
   {path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard]},
