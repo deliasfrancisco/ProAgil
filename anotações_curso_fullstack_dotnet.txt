@@ -241,7 +241,17 @@ Aula 137
 		useClass: AuthInterceptor, // Informa qual clase sera usada com o configuração do interceptor
 		multi: true}], // Permite o empilhamento de requisições configuradas no interceptor com o tap()
 		
-Aula 
+Aula 140
+- Quando o componente é criado dentro de outro ele não add a rota no app.module (add manualmente)
+- import { NgxMaskModule } from 'ngx-mask' - add no app.module
+- import { TabsModule } from 'ngx-bootstrap/tabs'; - add no app.module
+
+Aula 145
+- FormArrayGroup encadeado
+- ActivateRoute: 
+- Replace: remove o que é passado entre o parentese
+
+
 
 
 
