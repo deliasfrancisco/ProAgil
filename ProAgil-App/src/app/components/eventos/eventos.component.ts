@@ -42,13 +42,13 @@ export class EventosComponent implements OnInit {
     {
       this.localeService.use('pt-br');
       this.registerForm = this.formBuilder.group({
-        Tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-        Local: ['', Validators.required],
-        DataEvento: ['', Validators.required],
-        QtdPessoas: ['', [Validators.required, Validators.max(1200)]],
-        Telefone: ['', Validators.required],
-        Email: ['', [Validators.required, Validators.email]],
-        ImagemUrl: ['']
+        tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+        local: ['', Validators.required],
+        dataEvento: ['', Validators.required],
+        qtdPessoas: ['', [Validators.required, Validators.max(1200)]],
+        telefone: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        imagemUrl: ['']
       });
     }
 
@@ -67,8 +67,8 @@ export class EventosComponent implements OnInit {
 
   uploadImagem(){
     if(this.modoSalvar === 'post'){
-      const nomeArquivo = this.evento.ImagemUrl.split('\\', 3);
-      this.evento.ImagemUrl = nomeArquivo[2];
+      const nomeArquivo = this.evento.imagemUrl.split('\\', 3);
+      this.evento.imagemUrl = nomeArquivo[2];
 
       this.eventoService.postUpload(this.file,  nomeArquivo[2])
       .subscribe(() => {
@@ -77,7 +77,7 @@ export class EventosComponent implements OnInit {
       });
     }
     else{
-      this.evento.ImagemUrl = this.fileNameToUpdate;
+      this.evento.imagemUrl = this.fileNameToUpdate;
       this.eventoService.postUpload(this.file, this.fileNameToUpdate)
       .subscribe(() => {
         this.dataAtual = new Date().getMilliseconds().toString();
@@ -141,7 +141,7 @@ export class EventosComponent implements OnInit {
   filtrarEventos(filtrarPor:string): Evento[]{
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
-      evento => evento.Tema.toLocaleLowerCase().indexOf(filtrarPor)
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor)
       );
   }
 
@@ -149,18 +149,19 @@ export class EventosComponent implements OnInit {
     this.modoSalvar = 'put';
     this.openModal(template);
     this.evento = evento;
-    // this.evento = Object.assign({}, evento);
-    this.fileNameToUpdate = evento.ImageUrl;
-    evento.ImagemUrl = '';
+    this.evento = Object.assign({}, evento);
+    this.fileNameToUpdate = evento.imagemUrl.toString();
+    this.evento.imagemUrl = '';
+    // this.registerForm.patchValue(this.evento);
 
     this.registerForm.patchValue({
-      Tema: evento.tema,
-      Local: evento.local,
-      DataEvento: evento.dataEvento,
-      Telefone: evento.telefone,
-      Email: evento.email,
-      ImagemUrl: evento.imagemUrl,
-      QtdPessoas: evento.qtdPessoas
+      tema: evento.tema,
+      local: evento.local,
+      dataEvento: evento.dataEvento,
+      telefone: evento.telefone,
+      email: evento.email,
+      // imagemUrl: evento.imagemUrl,
+      qtdPessoas: evento.qtdPessoas
     });
   }
 
@@ -179,6 +180,7 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos(){
+    this.dataAtual = new Date().getMilliseconds().toString();
     this.eventoService.getAllEvento().subscribe(
       (_evento: Evento[]) => {
         this.eventos = _evento;
