@@ -71,12 +71,12 @@ namespace ProAgil.WebAPI.Controllers
             return BadRequest("Erro ao executar do upload da aplicação");
         }
 
-        [HttpGet("getByEventoId{eventoId}")]
-        public async Task<IActionResult> Get(int eventoId)
+        [HttpGet("getByEventoId/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var evento = await _repository.GetAllEventosAsyncById(eventoId, true);
+                var evento = await _repository.GetAllEventosAsyncById(id, true);
                 var results = _mapper.Map<EventoDto>(evento);
                 return Ok(results);
             }
@@ -110,7 +110,7 @@ namespace ProAgil.WebAPI.Controllers
 
 				if (await _repository.SaveChangesAsync())
 				{
-                    return Created($"/api/evento/{results.EventoId}", _mapper.Map<EventoDto>(model));
+                    return Created($"/api/evento/{results.Id}", _mapper.Map<EventoDto>(model));
 				}
             }
             catch (Exception ex)
@@ -126,22 +126,39 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                var evento = await _repository.GetAllEventosAsyncById(model.EventoId, false);
-                _mapper.Map(model, evento);
+				var evento = await _repository.GetAllEventosAsyncById(model.Id, false);
 
-                if (evento == null)
-                    return NotFound();
+				//var evento = await _repository.GetAllEventosAsyncById(model.Id, false);
+				//if (evento == null) return NotFound();
 
-                _repository.Update(evento);
+				//var idLotes = new List<int>();
+				//var idRedesSociais = new List<int>();
+
+				//model.Lotes.ForEach(item => idLotes.Add(item.Id));
+				//model.RedesSociais.ForEach(item => idLotes.Add(item.Id));
+
+				//var lotes = evento.Lotes.Where(x => !idLotes.Contains(x.Id)).ToList<Lote>();
+				//var redesSociais = evento.RedesSociais.Where(x => !idRedesSociais.Contains(x.Id)).ToList<RedeSocial>();
+
+				//if (lotes.Count > 0) _repository.DeleteRange(lotes.ToArray());
+
+				//if (redesSociais.Count > 0) _repository.DeleteRange(redesSociais.ToArray());
+
+				_mapper.Map(model, evento);
+
+				if (evento == null)
+					return NotFound();
+
+				_repository.Update(evento);
 
                 if (await _repository.SaveChangesAsync())
                 {
-                    return Created($"/api/evento/{model.EventoId}", _mapper.Map<EventoDto>(model));
+                    return Created($"/api/evento/{model.Id}", _mapper.Map<EventoDto>(model));
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Consulta falhou falhou" + ex);
             }
 
             return BadRequest();

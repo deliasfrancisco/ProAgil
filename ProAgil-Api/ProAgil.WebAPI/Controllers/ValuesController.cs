@@ -41,7 +41,7 @@ namespace ProAgil.WebAPI.Controllers
         {
             try
             {
-                var results = await _context.Eventos.FirstOrDefaultAsync(x => x.EventoId == id);
+                var results = await _context.Eventos.FirstOrDefaultAsync(x => x.Id == id);
                 return Ok(results); //irá retonar a lista com todos os registros desse modelo que foi persistido no banco de dados
             }
             catch (System.Exception)
