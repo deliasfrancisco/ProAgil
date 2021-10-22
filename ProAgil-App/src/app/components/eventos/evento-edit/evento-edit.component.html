@@ -37,7 +37,7 @@
             <div class="form-group col-md-4">
               <label>Data e Hora</label>
               <input type="text" class="form-control" [(ngModel)]="evento.dataEvento" bsDatepicker
-                value="{{dataEvento | DateTimeFormatPipe}}" [(ngModel)]="dataEvento"
+                value="{{dataEvento | DateTimeFormatPipe}}"
                 [bsConfig]="{ dateInputFormat : 'DD/MM/YYYY hh:mm' }" [ngClass]="{'is-invalid': registerForm.get('dataEvento').errors
             && registerForm.get('dataEvento').touched}" formControlName="dataEvento" placeholder="">
               <div *ngIf="registerForm.get('dataEvento').hasError('required')
@@ -109,7 +109,9 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label>Preço</label>
-                    <input type="text" class="form-control"
+                    <input type="text" currencyMask
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+                    class="form-control"
                     [ngClass]="{'is-invalid': lotes.get(i+'.preco').errors && lotes.get(i+'.preco').touched}"
                      formControlName="preco" placeholder="R$ 0,00">
                   </div>
@@ -164,9 +166,10 @@
                     <option value="fab fa-vimeo">Vimeo</option>
                   </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-8">
                   <label>Link</label>
-                  <input type="text" formControlName="url" class="form-control"
+                  <input type="text" prefix='https://' mask=""
+                  formControlName="url" class="form-control"
                   [ngClass]="{'is-invalid': redesSociais.get(j+'.url').errors && redesSociais.get(j+'.url').touched}"
                   placeholder="URL">
                 </div>
@@ -204,8 +207,8 @@
           <p class="card-text">
             <b>Local:</b> {{evento.local}}
             <br>
-            <b>Data:</b> {{evento.dataEvento}}
-            <!-- <b>Data:</b> {{evento.dataEvento | DateTimeFormatPipe}} -->
+            <!-- <b>Data:</b> {{evento.dataEvento}} -->
+            <b>Data:</b> {{evento.dataEvento | DateTimeFormatPipe}}
           </p>
           <hr>
           <p class="card-text">
@@ -220,9 +223,11 @@
           </p>
           <div class="row">
             <div class="icon-block col-md-8 iconesSociais">
-              <a class="mr-3"
+              <a href="{{redesSociais.get(i+'.url').value}}"
+              *ngFor="let rede of redesSociais.controls; let i=index;"
+              class="mr-3"
                 target="_blank">
-                <i class="fab fa-youtube"></i>
+                <i class="{{redesSociais.get(i+'.nome').value}}"></i>
               </a>
             </div>
             <!--div class="col-md-4 d-flex justify-content-center">

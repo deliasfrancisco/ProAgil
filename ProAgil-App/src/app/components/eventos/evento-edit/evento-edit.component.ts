@@ -73,7 +73,7 @@ export class EventoEditComponent implements OnInit {
       id: [],
       tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       local: ['', Validators.required],
-      dataEvento: ['', Validators.required],
+      dataEvento: [Date.now(), Validators.required],
       qtdPessoas: ['', [Validators.required, Validators.max(1200)]],
       telefone: ['', Validators.required],
       imagemUrl: [''],
@@ -122,12 +122,12 @@ export class EventoEditComponent implements OnInit {
     const reader = new FileReader();
 
     reader.onload = (event: any) => this.ImagemUrl = event.target.result;
-    this.file = event.target.files;
+    this.file = event.target['files'];
     reader.readAsDataURL(file[0]);
   }
 
   salvarEvento(){
-    this.evento = Object.assign({id: this.evento.eventoId}, this.registerForm.value);
+    this.evento = Object.assign({id: this.evento.id}, this.registerForm.value);
     this.evento.imagemUrl = this.fileNameToUpdate;
 
     this.uploadImagem();

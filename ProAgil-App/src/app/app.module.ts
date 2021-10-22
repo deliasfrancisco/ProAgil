@@ -27,6 +27,7 @@ import { AuthInterceptor } from './components/auth/auth.inteceptor';
 import { EventoEditComponent } from './components/eventos/evento-edit/evento-edit.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { NgxMaskModule } from 'ngx-mask';
       preventDuplicates: true,
     }),
     NgxMaskModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    NgxCurrencyModule
   ],
   providers: [EventoService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

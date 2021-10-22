@@ -26,8 +26,8 @@
       <th>
         <button class="btn btn-outline-primary" (click)="alterarImagem()">
           <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
-          <!-- {{mostrarImagem ? 'Ocultar' : 'Mostrar'}}
-            Mostrar Imagem -->
+          {{mostrarImagem ? 'Ocultar' : 'Mostrar'}}
+            Mostrar Imagem
           </button>
         </th>
         <th>#</th>
@@ -73,7 +73,7 @@
         </div>
       </td>
       <td>
-        <a [routerLink]="['/evento',evento['eventoId'], 'edit']" tooltip="Edição detalhada" class="btn btn-sm btn-warning">
+        <a [routerLink]="['/evento',evento.id, 'edit']" tooltip="Edição detalhada" class="btn btn-sm btn-warning">
           <i class="fa fa-edit"></i>
         </a>
       </td>
@@ -207,7 +207,7 @@
             Fechar
           </button>
           <!-- <button class="btn btn-primary ml-auto" [disabled]="!registerForm.valid" (click)="salvarAlteracao(template)"> -->
-          <button class="btn btn-primary ml-auto" [disabled]="!registerForm.valid"  (click)="salvarAlteracao(template)">
+          <button class="btn btn-primary ml-auto"  (click)="salvarAlteracao(template)">
             Salvar Alterações
           </button>
         </div>

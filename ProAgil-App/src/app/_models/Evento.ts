@@ -3,10 +3,9 @@ import { Palestrante } from "./Palestrante";
 import { RedeSocial } from "./RedeSocial";
 
 export class Evento {
-  eventoId:number;
   id: number;
   local:string;
-  dataEvento:Date;
+  dataEvento:string;
   tema:string;
   qtdPessoas:number
   imagemUrl:string;
