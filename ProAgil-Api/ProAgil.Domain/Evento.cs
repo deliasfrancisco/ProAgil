@@ -7,7 +7,7 @@ namespace ProAgil.Domain
     public class Evento
     {
         [Key]
-        public int EventoId { get; set; }
+        public int Id { get; set; }
 
         public string Local { get; set; }
 
