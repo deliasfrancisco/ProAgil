@@ -7,7 +7,8 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class RedeSocialDto
     {
-        public string Nome { get; set; }
+		public int Id { get; set; }
+		public string Nome { get; set; }
         public string URL { get; set; }
         public EventoDto Evento { get; set; }
         public PalestranteDto Palestrante { get; }
