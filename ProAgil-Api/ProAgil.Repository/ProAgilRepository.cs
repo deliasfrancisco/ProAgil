@@ -70,7 +70,7 @@ namespace ProAgil.Repository
 					.ThenInclude(p => p.Palestrante); // então inclua tambem o palestrante
 			}
 
-			query = query.OrderByDescending(c => c.DataEvento).Where(c => c.EventoId == EventoId);
+			query = query.OrderByDescending(c => c.DataEvento).Where(c => c.Id == EventoId);
 			return await query.FirstOrDefaultAsync();
 		}
 
@@ -121,6 +121,11 @@ namespace ProAgil.Repository
 
 			query = query.Where(p => p.Nome.ToLower().Contains(name.ToLower()));
 			return await query.ToArrayAsync();
+		}
+
+		public void DeleteRange<T>(T[] entityArray) where T : class
+		{
+			_context.RemoveRange(entityArray);
 		}
 	}
 }
