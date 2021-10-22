@@ -251,7 +251,27 @@ Aula 145
 - ActivateRoute: 
 - Replace: remove o que é passado entre o parentese
 
+Aula 152
+- RemoveRange = Remove ums lista de objetos
 
+Aula 154
+- npm i ngx-currency: mascara de moeda e para prefixo de texto
+
+Aula 158
+- Melhoria no disign com bootswatch: npm i bootswatch
+- Com o this.router.url é possivel verificar a url para fazer uma validação para exibir o menu
+- class="mt-4": margin-top de 4
+
+Aula 161
+- Deploy do Angular: Na pagina do Angula.io entrar em docs e pesquisar por deploy, em inspect bundles, copiar o comando npm install source-map-explorer --save-dev para
+	se não instalar faze o deploy dos arquivos sempre com o mesmo nome e não carrega o arquivo, onde essa extensão altera automaticamente
+- Após rodar o comando acima, foi criado a pasta 'dist', entrar nela, na pasta gerada com o deploy do projeto e rodar um ng serve --port 'porta-da-aplcacao' -o
+serve --port 4200 -o 
+- Deploy do .NET: abrir o projeto no teminal e rodar o comando: dotnet publish -o E:/8_Projetos/pro-agil - rota do diretorio onde será feito o deploy
+- Após isso entrar na pasta onde foram gerados os arquivos de dll e criar a pasta Resources (nesse cenario essa pasta esta sendo criado no Startup) e sendo assim deve ser
+	criado tambem essa pasta junto com as dll's
+O arquivo de confirações app-settings.json de produção deve ser examente igual ao de desenvolvimento
+- a pasta dist criada no deploy do front pode ser excluida quando for subir as alterações para o repositorio
 
 
 
